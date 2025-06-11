@@ -47,4 +47,11 @@ public class BookController {
     model.addAttribute("bookList", bookList);
     return "books";
   }
+
+  @GetMapping("/{category}/{publisher}")
+  public String requestBookByFilter(@PathVariable String category, @PathVariable String publisher, Model model) {
+    List<Book> bookList = bookService.getBookListByFilter(category, publisher);
+    model.addAttribute("bookList", bookList);
+    return "books";
+  }
 }
