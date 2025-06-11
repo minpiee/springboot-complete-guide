@@ -12,4 +12,6 @@ public interface BookRepository {
   List<Book> getBookListByCategory(String category);
 
   List<Book> getBookListByFilter(String category, String publisher);
+
+  void setNewBook(Book book);
 }

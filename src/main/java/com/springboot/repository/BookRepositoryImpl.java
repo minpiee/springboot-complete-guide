@@ -104,4 +104,9 @@ public class BookRepositoryImpl implements BookRepository {
 
     return booksByFilter;
   }
+
+  @Override
+  public void setNewBook(Book book) {
+    listOfBooks.add(book);
+  }
 }

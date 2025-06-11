@@ -4,10 +4,7 @@ import com.springboot.domain.Book;
 import com.springboot.service.BookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -53,5 +50,16 @@ public class BookController {
     List<Book> bookList = bookService.getBookListByFilter(category, publisher);
     model.addAttribute("bookList", bookList);
     return "books";
+  }
+
+  @GetMapping("/add")
+  public String requestAddBook() {
+    return "addBook";
+  }
+
+  @PostMapping("/add")
+  public String submitAddNewBook(@ModelAttribute("book") Book book) {
+    bookService.setNewBook(book);
+    return "redirect:/books";
   }
 }
