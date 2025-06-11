@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도서 상세</title>
+  </head>
+  <body>
+    <p><b>도서 제목</b> : <span th:text="${book.name}"></span></p>
+    <p><b>설명</b> : <span th:text="${book.description}"></span></p>
+    <p><b>도서 코드</b> : <span th:text="${book.bookId}"></span></p>
+    <p><b>저자</b> : <span th:text="${book.author}"></span></p>
+    <p><b>출판사</b> : <span th:text="${book.publisher}"></span></p>
+    <p><b>출판일</b> : <span th:text="${book.releaseDate}"></span></p>
+    <p><b>분류</b> : <span th:text="${book.category}"></span></p>
+    <p><b>재고수</b> : <span th:text="${book.unitsInStock}"></span></p>
+    <p><b>가격</b> : <span th:text="${book.unitPrice + '원'}"></span></p>
+  </body>
+</html>

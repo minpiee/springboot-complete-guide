@@ -3,8 +3,10 @@ package com.springboot.controller;
 import com.springboot.domain.Book;
 import com.springboot.service.BookService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -29,5 +31,12 @@ public class BookController {
     mav.addObject("bookList", bookList);
     mav.setViewName("books");
     return mav;
+  }
+
+  @GetMapping("/book")
+  public String requestBookById(@RequestParam("id") String bookId, Model model) {
+    Book book = bookService.getBookById(bookId);
+    model.addAttribute("book", book);
+    return "book";
   }
 }
