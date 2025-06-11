@@ -6,6 +6,12 @@
     <title>도서 목록</title>
   </head>
   <body>
+    <ul>
+      <li><a th:href="@{/books}">전체도서</a></li>
+      <li><a th:href="@{'/books/' + 'IT 전문서'}">IT 전문서</a></li>
+      <li><a th:href="@{'/books/' + 'IT 교육교재'}">IT 교육교재</a></li>
+    </ul>
+
     <div th:each="book : ${bookList}">
       <p th:text="${book.name}"></p>
       <p th:text="${book.author}"></p>
