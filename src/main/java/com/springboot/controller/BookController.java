@@ -1,0 +1,33 @@
+package com.springboot.controller;
+
+import com.springboot.domain.Book;
+import com.springboot.service.BookService;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
+
+@Controller
+@RequestMapping("/books")
+public class BookController {
+
+  private final BookService bookService;
+
+  // 생성자가 하나뿐인 경우 @Autowired 생략 가능 (Spring 4.3 이상)
+  public BookController(BookService bookService) {
+    this.bookService = bookService;
+  }
+
+  @GetMapping
+  public ModelAndView requestAllBooks() {
+    ModelAndView mav = new ModelAndView();
+
+    List<Book> bookList = bookService.getAllBookList();
+
+    mav.addObject("bookList", bookList);
+    mav.setViewName("books");
+    return mav;
+  }
+}

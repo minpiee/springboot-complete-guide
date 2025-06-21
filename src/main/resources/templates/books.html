@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>도서 목록</title>
+    <link rel="stylesheet" th:href="@{/css/books.css}" />
+  </head>
+  <body>
+    <section>
+      <div th:each="book : ${bookList}">
+        <p th:text="${'[' + book.category + ']'}"></p>
+        <p th:text="${book.name}"></p>
+        <p th:text="${book.author}"></p>
+        <p th:text="${book.publisher + ' | ' + book.releaseDate}"></p>
+        <p th:text="${book.description}"></p>
+        <p th:text="${book.unitPrice + '원'}"></p>
+        <a th:href="@{/books/book(id=${book.bookId})}">상세정보 &raquo;</a>
+      </div>
+    </section>
+  </body>
+</html>
