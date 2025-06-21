@@ -30,4 +30,9 @@ public class BookServiceImpl implements BookService {
   public List<Book> getBookListByFilter(String category, String publisher) {
     return bookRepository.getBookListByFilter(category, publisher);
   }
+
+  @Override
+  public void setNewBook(Book book) {
+    bookRepository.setNewBook(book);
+  }
 }
