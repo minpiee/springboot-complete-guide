@@ -72,4 +72,35 @@ public class BookRepositoryImpl implements BookRepository {
 
     return bookInfo;
   }
+
+  @Override
+  public List<Book> getBookListByFilter(String category, String publisher) {
+
+    List<Book> filteredBooks = new ArrayList<>();
+
+    // 분야와 출판사를 선택했는지 확인 → 선택하면 true
+    boolean hasCategory = category != null && !category.isEmpty();
+    boolean hasPublisher = publisher != null && !publisher.isEmpty();
+
+    // 분야와 출판사 둘 다 선택하지 않았다면, 전체 도서 목록을 그대로 반환
+    if (!hasCategory && !hasPublisher) {
+      return listOfBooks;
+    }
+
+    for (Book book : listOfBooks) {
+      // 분야를 선택하지 않은 경우: 오른쪽 조건은 검사하지 않음
+      // 분야를 선택한 경우: 책의 분야가 선택한 값과 같을 때만 통과
+      boolean matchesCategory = !hasCategory || book.getCategory().equals(category);
+      // 출판사를 선택하지 않은 경우: 오른쪽 조건은 검사하지 않음
+      // 출판사를 선택한 경우: 책의 출판사가 선택한 값과 같을 때만 통과
+      boolean matchesPublisher = !hasPublisher || book.getPublisher().equals(publisher);
+
+      // 위 조건을 모두 만족하는 책만 결과 리스트에 추가
+      if (matchesCategory && matchesPublisher) {
+        filteredBooks.add(book);
+      }
+    }
+
+    return filteredBooks;
+  }
 }

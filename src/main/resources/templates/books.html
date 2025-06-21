@@ -7,15 +7,40 @@
     <link rel="stylesheet" th:href="@{/css/books.css}" />
   </head>
   <body>
+    <form th:action="@{/books/search}" method="GET">
+      <label for="category">분야:</label>
+      <select name="category" id="category">
+        <option value="" th:selected="${selectedCategory == null}">선택하세요</option>
+        <option th:each="category : ${categories}"
+                th:value="${category}"
+                th:text="${category}"
+                th:selected="${selectedCategory == category}"></option>
+      </select>
+      <label for="publisher">출판사:</label>
+      <select name="publisher" id="publisher">
+        <option value="" th:selected="${selectedPublisher == null}">선택하세요</option>
+        <option th:each="publisher : ${publishers}"
+                th:value="${publisher}"
+                th:text="${publisher}"
+                th:selected="${selectedPublisher == publisher}"></option>
+      </select>
+      <button type="submit">검색</button>
+    </form>
+
     <section>
-      <div th:each="book : ${bookList}">
-        <p th:text="${'[' + book.category + ']'}"></p>
-        <p th:text="${book.name}"></p>
-        <p th:text="${book.author}"></p>
-        <p th:text="${book.publisher + ' | ' + book.releaseDate}"></p>
-        <p th:text="${book.description}"></p>
-        <p th:text="${book.unitPrice + '원'}"></p>
-        <a th:href="@{/books/book(id=${book.bookId})}">상세정보 &raquo;</a>
+      <div th:if="${#lists.isEmpty(bookList)}">
+        <p>검색 결과가 없습니다 🥲</p>
+      </div>
+      <div th:unless="${#lists.isEmpty(bookList)}">
+        <div th:each="book : ${bookList}">
+          <p th:text="${'[' + book.category + ']'}"></p>
+          <p th:text="${book.name}"></p>
+          <p th:text="${book.author}"></p>
+          <p th:text="${book.publisher + ' | ' + book.releaseDate}"></p>
+          <p th:text="${book.description}"></p>
+          <p th:text="${book.unitPrice + '원'}"></p>
+          <a th:href="@{/books/book(id=${book.bookId})}">상세정보 &raquo;</a>
+        </div>
       </div>
     </section>
   </body>
